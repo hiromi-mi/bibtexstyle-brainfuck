@@ -8,6 +8,8 @@ You can open [example.pdf](https://github.com/hiromi-mi/bibtexstyle-brainfuck/bl
 $ latex example
 $ bibtex example
 $ latex example
+$ latex example
+$ dvipdfmx example
 ```
 
 ## Specification
@@ -22,11 +24,12 @@ $ latex example
 * `bfcode` : Brainfuck source code
 
 ## Restriction
-* `\n' or `\r` is currently treated as space, potentially due to BiBTeX's restriction.
+* `\n' and `\r` are currently treated as space, potentially due to BiBTeX's restriction.
 * Interactive input/output will be not avaliable.
 * The length of cell array is currently 3000. You can extend the length by substitute `#3000` in `brainfuck.bst`.
 * The cell has unsigned 8bit value.
 * When reached end of standard input, `,` will return 0.
+* Multibyte input probably does not work as expected.
 
 ## License
 The Unlicense
