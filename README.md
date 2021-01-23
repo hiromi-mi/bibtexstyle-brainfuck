@@ -24,7 +24,7 @@ $ dvipdfmx example
 * `bfcode` : Brainfuck source code
 
 ## Restriction
-* `\n' and `\r` are currently treated as space, potentially due to BiBTeX's restriction.
+* `\n` and `\r` are currently treated as space, potentially due to BiBTeX's restriction.
 * Interactive input/output will be not avaliable.
 * The length of cell array is currently 3000. You can extend the length by substitute `#3000` in `brainfuck.bst`.
 * The cell has unsigned 8bit value.
