@@ -1,7 +1,7 @@
 ENTRY 
 {
-    bfinput
-    bfcode
+   bfinput
+   bfcode
 }
 {}
 {}
@@ -11,77 +11,75 @@ STRINGS { bf.chr bf.reg bf.tmpstr}
 % initialized as ""
 FUNCTION {bf.save}
 {
-         % registername begin length
-         % retrieve new variable
-         % bf.reg .... <bf.cur > bf.reg .... -> bf.reg
-         bf.reg #1 
-            bf.var #1 -
-         substring$
-         bf.curreg int.to.chr$ *
-         'bf.tmpstr :=
+   % registername begin length
+   % retrieve new variable
+   % bf.reg .... <bf.cur > bf.reg .... -> bf.reg
+   bf.reg #1 
+   bf.var #1 -
+   substring$
+   bf.curreg int.to.chr$ *
+   'bf.tmpstr :=
 
-         bf.tmpstr
-         bf.reg
-            bf.var #1 +
-            #3000 % at most 30
-         substring$
-         *
-         'bf.reg :=
+   bf.tmpstr
+   bf.reg
+   bf.var #1 +
+   #3000 % at most 30
+   substring$
+   *
+   'bf.reg :=
 }
 
 FUNCTION {brainfuck}
 {
-  newline$
-  "\bibitem{" write$
-  cite$ write$
-  "}" write$
-  newline$
-  
-  % current register id where register
-  #1 'bf.var :=
+   newline$
+   "\bibitem{" write$
+   cite$ write$
+   "}" write$
+   newline$
 
-  % current sourcecode position
-  #1 'bf.current :=
+   % current sourcecode position
+   #1 'bf.var :=
 
-  % current input position
-  #1 'bf.inputcur :=
+   % current sourcecode position
+   #1 'bf.current :=
 
-  #1 'bf.counter :=
-  "" 'bf.reg :=
-  #0 'bf.curreg :=
+   % current input position
+   #1 'bf.inputcur :=
 
-  % initialize bf.reg with zero
-  { #3001 bf.counter > }
-  {
-     bf.reg #0 int.to.chr$ * 'bf.reg :=
-     bf.counter #1 + 'bf.counter :=
-  }
-  while$
+   % counter temporary variable
+   #1 'bf.counter :=
 
-  % +1 due to <= is not avaliable
-  { #1 bfcode text.length$ + bf.current > }
-  {
-  % Get First Character of brainfuck code int bf.chr
-     bfcode bf.current #1 substring$
-     'bf.chr :=
+   % all registers
+   "" 'bf.reg :=
 
-     bf.chr "+" =
-     {
-        bf.curreg #1 + 'bf.curreg := 
-                %":+" write$
-        %bf.curreg #1 + 'bf.curreg := 
-     } %"hogehoge" write$ }
-     'skip$
-     if$
+   % current register's item. will be updated to bf.reg
+   #0 'bf.curreg :=
+
+   % initialize bf.reg with zero
+   { #3001 bf.counter > }
+   {
+      bf.reg #0 int.to.chr$ * 'bf.reg :=
+      bf.counter #1 + 'bf.counter :=
+   }
+   while$
+
+   % +1 due to <= is not avaliable
+   { #1 bfcode text.length$ + bf.current > }
+   {
+      % Get First Character of brainfuck code int bf.chr
+      bfcode bf.current #1 substring$
+      'bf.chr :=
+
+      bf.chr "+" =
+      {
+         bf.curreg #1 + 'bf.curreg := 
+      }
+      'skip$ if$
 
       bf.chr "-" =
       {
-         %bfvar2 #1 - 'bfvar :=
          bf.curreg #1 - 'bf.curreg := 
          %":-" write$
-      % bfvar2 #1 + 'bfvar :=
-         %bfvar #1 - 'bfvar :=
-         %bf.curreg
       }
       'skip$ if$
 
@@ -189,13 +187,11 @@ FUNCTION {brainfuck}
          %":]" write$
       }
       'skip$ if$
-      
-     %"hoge" bf.chr "fuga" stack$
 
-     % stack's top: current bf character
-     #1 bf.current + 'bf.current :=
-  }
-  while$
+      % stack's top: current bf character
+      #1 bf.current + 'bf.current :=
+   }
+   while$
 }
 
 FUNCTION {begin.bib}
@@ -208,7 +204,6 @@ FUNCTION {default.type} { brainfuck }
 READ
 
 EXECUTE {begin.bib}
-
 
 ITERATE {call.type$}
 
