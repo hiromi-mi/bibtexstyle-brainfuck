@@ -47,7 +47,7 @@ FUNCTION {brainfuck}
    #1 'bf.inputcur :=
 
    % counter temporary variable
-   #1 'bf.counter :=
+   #0 'bf.counter :=
 
    % all registers
    "" 'bf.reg :=
@@ -56,7 +56,7 @@ FUNCTION {brainfuck}
    #0 'bf.curreg :=
 
    % initialize bf.reg with zero
-   { #3001 bf.counter > }
+   { #3000 bf.counter > }
    {
       bf.reg #0 int.to.chr$ * 'bf.reg :=
       bf.counter #1 + 'bf.counter :=
